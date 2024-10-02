@@ -9,6 +9,8 @@
     align-items: center;
     justify-content: center;
     width: 220px;
+    margin: 10px;
+    flex-shrink: 0;
 }
 
 .video-card:hover {
@@ -24,4 +26,14 @@
     color: #ffffff;
     text-align: center;
     padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .video-grid {
+        padding: 5px;
+    }
+    .video-card {
+        width: 90%;
+        font-size: 14px;
+    }
 }

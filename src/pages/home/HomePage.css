@@ -3,13 +3,3 @@
     color: #ffffff;
     padding: 20px;
 }
-
-.video-card {
-    background-color: #1e1e1e;
-    border-radius: 10px;
-    transition: transform 0.2s;
-}
-
-.video-card:hover {
-    transform: scale(1.05);
-}

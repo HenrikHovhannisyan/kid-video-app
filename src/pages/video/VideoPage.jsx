@@ -3,8 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import YouTubeVideo from "../../components/youTubeVideo/YouTubeVideo";
 import { useSwipeable } from "react-swipeable";
 import { videos } from "../../config/videoData";
-import Modal from "react-modal";
-import VideoCard from "../../components/videoCard/VideoCard"; // Импортируем VideoCard
+import VideoModal from "../../components/videoModal/VideoModal";
 
 const getRandomVideos = (currentId, count) => {
     return videos
@@ -69,66 +68,16 @@ const VideoPage = () => {
                         cursor: "pointer",
                     }}
                 >
-                    l
+                    🡹
                 </button>
             </div>
 
-            <Modal
+            <VideoModal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
-                contentLabel="Պատահական տեսանյութեր"
-                style={{
-                    overlay: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                    },
-                    content: {
-                        position: 'absolute',
-                        inset: 'unset',
-                        bottom: '0',
-                        left: '0',
-                        right: '0',
-                        width: '100%',
-                        maxHeight: '80vh',
-                        padding: '0',
-                        backgroundColor: '#fff',
-                        overflowY: 'auto',
-                        borderRadius: '8px 8px 0 0',
-                    },
-                }}
-            >
-                <button
-                    onClick={closeModal}
-                    style={{
-                        position: 'absolute',
-                        top: '20px',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        zIndex: 1001,
-                        backgroundColor: "rgba(255, 255, 255, 0.8)",
-                        border: "none",
-                        borderRadius: "5px",
-                        padding: "10px 20px",
-                        fontSize: "16px",
-                        cursor: "pointer",
-                    }}
-                >
-                    X
-                </button>
-
-                <div style={{ display: "flex", overflowX: "auto", padding: '60px 20px 20px' }}>
-                    {randomVideos.length > 0 ? (
-                        randomVideos.map((video) => (
-                            <VideoCard
-                                key={video.id}
-                                video={video}
-                                handleVideoClick={handleVideoClick}
-                            />
-                        ))
-                    ) : (
-                        <p>Բեռնվում են պատահական տեսանյութեր...</p>
-                    )}
-                </div>
-            </Modal>
+                videos={randomVideos}
+                handleVideoClick={handleVideoClick}
+            />
         </div>
     );
 };
