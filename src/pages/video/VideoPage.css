@@ -1,0 +1,28 @@
+.video-card {
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+}
+
+.video-card:hover {
+    transform: scale(1.05);
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #fff;
+}
+
+.video-title {
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+}

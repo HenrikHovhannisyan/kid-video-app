@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import YouTubeVideo from "../components/YouTubeVideo";
+import YouTubeVideo from "../../components/youTubeVideo/YouTubeVideo";
 import { useSwipeable } from "react-swipeable";
-import { videos } from "../config/videoData";
+import { videos } from "../../config/videoData";
 import Modal from "react-modal";
+import VideoCard from "../../components/videoCard/VideoCard"; // Импортируем VideoCard
 
 const getRandomVideos = (currentId, count) => {
     return videos
@@ -33,10 +34,6 @@ const VideoPage = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, [id, isMobile]);
 
-    const handlers = useSwipeable({
-        onSwipedUp: () => setRandomVideos(getRandomVideos(id, 10)),
-    });
-
     const handleVideoClick = (videoId) => {
         navigate(`/video/${videoId}`);
     };
@@ -51,7 +48,6 @@ const VideoPage = () => {
 
     return (
         <div
-            {...handlers}
             style={{ height: "100vh", display: "flex", flexDirection: "column" }}
         >
             <div style={{ flex: 1, position: "relative" }}>
@@ -122,18 +118,11 @@ const VideoPage = () => {
                 <div style={{ display: "flex", overflowX: "auto", padding: '60px 20px 20px' }}>
                     {randomVideos.length > 0 ? (
                         randomVideos.map((video) => (
-                            <div
+                            <VideoCard
                                 key={video.id}
-                                style={{ margin: "10px", cursor: "pointer" }}
-                                onClick={() => handleVideoClick(video.id)}
-                            >
-                                <img
-                                    src={`https://img.youtube.com/vi/${video.id}/0.jpg`}
-                                    alt={video.title}
-                                    width="150"
-                                />
-                                <h4>{video.title}</h4>
-                            </div>
+                                video={video}
+                                handleVideoClick={handleVideoClick}
+                            />
                         ))
                     ) : (
                         <p>Բեռնվում են պատահական տեսանյութեր...</p>

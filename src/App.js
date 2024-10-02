@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import VideoPage from "./pages/VideoPage";
+import HomePage from "./pages/home/HomePage";
+import VideoPage from "./pages/video/VideoPage";
 
 const App = () => {
   return (
