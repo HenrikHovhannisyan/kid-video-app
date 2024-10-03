@@ -12,17 +12,23 @@ const YouTubeVideo = ({ videoId }) => {
       controls: 1,
       showinfo: 0,
       disablekb: 1,
+      fs: 0,
     },
   };
 
+  const onVideoEnd = (event) => {
+    event.target.playVideo();
+  };
+
   return (
-    <div style={{ position: "relative", width: "100%", height: "100vh" }}>
-      <YouTube
-        videoId={videoId}
-        opts={opts}
-        style={{ width: "100%", height: "100%" }}
-      />
-    </div>
+      <div style={{ position: "relative", width: "100%", height: "100vh" }}>
+        <YouTube
+            videoId={videoId}
+            opts={opts}
+            style={{ width: "100%", height: "100%" }}
+            onEnd={onVideoEnd}
+        />
+      </div>
   );
 };
 
