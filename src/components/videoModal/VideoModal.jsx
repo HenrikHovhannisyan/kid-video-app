@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import VideoCard from "../videoCard/VideoCard";
 import "./VideoModal.css";
 
 const VideoModal = ({ isOpen, onRequestClose, videos, handleVideoClick }) => {
+    const [isVideoLoading, setIsVideoLoading] = useState(false);
+
+    const handleCardClick = (videoId) => {
+        if (!isVideoLoading) {
+            setIsVideoLoading(true);
+            handleVideoClick(videoId);
+        }
+    };
+
     return (
         <Modal
             isOpen={isOpen}
@@ -26,11 +35,11 @@ const VideoModal = ({ isOpen, onRequestClose, videos, handleVideoClick }) => {
                         <VideoCard
                             key={video.id}
                             video={video}
-                            handleVideoClick={handleVideoClick}
+                            handleVideoClick={() => handleCardClick(video.id)}
                         />
                     ))
                 ) : (
-                    <p>Загрузка видео...</p>
+                    <p>Տեսանյութը բեռնվում է…</p>
                 )}
             </div>
         </Modal>
