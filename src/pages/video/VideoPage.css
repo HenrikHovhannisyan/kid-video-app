@@ -1,11 +1,18 @@
-.video-thumbnail {
-    width: 100%;
-    height: auto;
-    border-bottom: 2px solid #fff;
+.top-btn {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    line-height: 5px;
 }
 
-.video-title {
-    color: #ffffff;
-    text-align: center;
-    padding: 10px;
+.top-btn > svg {
+    width: 20px;
+    height: 20px;
 }

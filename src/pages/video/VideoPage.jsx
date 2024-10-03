@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import "./VideoPage.css"
 import { useParams, useNavigate } from "react-router-dom";
 import YouTubeVideo from "../../components/youTubeVideo/YouTubeVideo";
-import { useSwipeable } from "react-swipeable";
 import { videos } from "../../config/videoData";
 import VideoModal from "../../components/videoModal/VideoModal";
 
@@ -52,23 +52,12 @@ const VideoPage = () => {
             <div style={{ flex: 1, position: "relative" }}>
                 <YouTubeVideo videoId={id} />
 
-                <button
-                    onClick={openModal}
-                    style={{
-                        position: "absolute",
-                        bottom: "10px",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        zIndex: 1000,
-                        backgroundColor: "rgba(255, 255, 255, 0.8)",
-                        border: "none",
-                        borderRadius: "5px",
-                        padding: "5px 10px",
-                        fontSize: "14px",
-                        cursor: "pointer",
-                    }}
-                >
-                    🡹
+                <button onClick={openModal} className={'top-btn'}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         className="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+                    </svg>
                 </button>
             </div>
 
