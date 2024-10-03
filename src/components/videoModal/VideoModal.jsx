@@ -10,6 +10,7 @@ const VideoModal = ({ isOpen, onRequestClose, videos, handleVideoClick }) => {
         if (!isVideoLoading) {
             setIsVideoLoading(true);
             handleVideoClick(videoId);
+            onRequestClose();
         }
     };
 
