@@ -13,6 +13,7 @@
     display: none;
 }
 
+.video-header > button > svg,
 .top-btn > svg {
     width: 20px;
     height: 20px;
@@ -24,7 +25,7 @@
     height: 60px;
     width: 100%;
     z-index: 2;
-    background-color: transparent;
+    background-color: #000000;
     border: none;
     align-items: center;
     display: flex;
@@ -34,7 +35,7 @@
     z-index: 2;
     background-color: #ffffff;
     border: none;
-    border-radius: 50px;
+    border-radius: 5px;
     padding: 5px;
     cursor: pointer;
     line-height: 5px;
@@ -45,11 +46,6 @@
 #root:hover .top-btn,
 #root:hover .video-header > button {
     display: block;
-}
-
-.video-header > button > svg {
-    width: 35px;
-    height: 35px;
 }
 
 .btn-block {
