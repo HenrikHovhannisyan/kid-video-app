@@ -4,14 +4,9 @@ import VideoCard from "../videoCard/VideoCard";
 import "./VideoModal.css";
 
 const VideoModal = ({ isOpen, onRequestClose, videos, handleVideoClick }) => {
-    const [isVideoLoading, setIsVideoLoading] = useState(false);
-
     const handleCardClick = (videoId) => {
-        if (!isVideoLoading) {
-            setIsVideoLoading(true);
-            handleVideoClick(videoId);
-            onRequestClose();
-        }
+        handleVideoClick(videoId);
+        onRequestClose();
     };
 
     return (
