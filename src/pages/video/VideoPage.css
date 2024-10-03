@@ -10,9 +10,64 @@
     padding: 5px;
     cursor: pointer;
     line-height: 5px;
+    display: none;
 }
 
 .top-btn > svg {
     width: 20px;
     height: 20px;
+}
+
+.video-header {
+    position: absolute;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    z-index: 2;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+    display: flex;
+}
+
+.video-header > button {
+    z-index: 2;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    padding: 5px;
+    cursor: pointer;
+    line-height: 5px;
+    margin-left: 10px;
+    display: none;
+}
+
+#root:hover .top-btn,
+#root:hover .video-header > button {
+    display: block;
+}
+
+.video-header > button > svg {
+    width: 35px;
+    height: 35px;
+}
+
+.btn-block {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 35px;
+    width: 115px;
+    z-index: 2;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+    display: flex;
+}
+
+@media (max-width: 576px) {
+    .top-btn,
+    .video-header > button {
+        display: block;
+    }
 }
