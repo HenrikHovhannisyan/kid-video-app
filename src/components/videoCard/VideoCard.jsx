@@ -11,7 +11,7 @@ const VideoCard = ({ video, handleVideoClick }) => {
                     alt={video.title}
                     className="video-thumbnail"
                 />
-                <h4 className="video-title">{video.title}</h4>
+                <h4 className="video-title" title={video.title}>{video.title}</h4>
             </Link>
         </div>
     );

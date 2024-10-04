@@ -19,14 +19,7 @@ const HomePage = () => {
     };
 
     return (
-        <div
-            style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-                gap: "20px",
-                padding: "20px",
-            }}
-        >
+        <div className="home-container">
             {shuffledVideos.map((video) => (
                 <VideoCard
                     key={video.id}
