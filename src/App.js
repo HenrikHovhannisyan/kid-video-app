@@ -9,10 +9,12 @@ import SignUp from "./components/auth/SignUp";
 import SignIn from "./components/auth/SingIn";
 import AuthDetails from "./components/auth/AuthDetails";
 import AddVideo from "./components/videos/AddVideo";
+import Header from "./components/header/Header";
 
 const App = () => {
   return (
     <Router>
+      <Header />
       <Routes>
         <Route exact path="/" element={<HomePage />} />
         <Route path="/video/:id" element={<VideoPage />} />

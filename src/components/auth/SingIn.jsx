@@ -1,10 +1,11 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../firebase";
-import { Link } from "react-router-dom";
-import "./style.css";
+import { Link, useNavigate } from "react-router-dom";
+import "./Style.css";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -44,6 +45,7 @@ const SignIn = () => {
         setError("");
         setEmail("");
         setPassword("");
+        navigate("/");
       })
       .catch((error) => {
         console.log(error);

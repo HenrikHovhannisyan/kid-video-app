@@ -17,20 +17,17 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
-  // Пропускаем запросы к chrome-extension
   if (event.request.url.startsWith("chrome-extension://")) {
     return;
   }
 
   event.respondWith(
     caches.match(event.request).then((response) => {
-      // Cache hit - return response
       if (response) {
         return response;
       }
 
       return fetch(event.request).then((response) => {
-        // Check if we received a valid response
         if (
           !response ||
           response.status !== 200 ||
@@ -39,7 +36,6 @@ self.addEventListener("fetch", (event) => {
           return response;
         }
 
-        // Clone the response
         const responseToCache = response.clone();
 
         caches.open(CACHE_NAME).then((cache) => {
