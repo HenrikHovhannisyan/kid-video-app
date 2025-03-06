@@ -20,6 +20,25 @@ legend {
   margin-bottom: 20px;
 }
 
+.user-info {
+  max-width: 1200px;
+  padding: 15px;
+  margin: auto;
+}
+
+.auth-details {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 15px;
+  display: grid;
+  gap: 10px;
+}
+
+.auth-details > button {
+  width: max-content;
+}
+
 @media (max-width: 600px) {
   fieldset {
     padding: 20px;

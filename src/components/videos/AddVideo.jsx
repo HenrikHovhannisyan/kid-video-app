@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import "./AddVideo.css";
 
 const AddVideo = () => {
   const [videoUrl, setVideoUrl] = useState("");
@@ -28,7 +29,7 @@ const AddVideo = () => {
       await addDoc(collection(db, "videos"), {
         user_id: user.uid,
         video: videoUrl,
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
       });
 
       setSuccess("Видео успешно добавлено!");
@@ -40,18 +41,20 @@ const AddVideo = () => {
 
   return (
     <div className="add-video-container">
-      <h2>Добавить новое видео</h2>
+      <h2>Add new video</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="url"
           value={videoUrl}
           onChange={(e) => setVideoUrl(e.target.value)}
-          placeholder="Введите URL видео"
+          placeholder="Enter video URL"
           required
         />
-        <button type="submit">Добавить</button>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {success && <p style={{ color: "green" }}>{success}</p>}
+        <button type="submit" className="button button-primary">
+          Add
+        </button>
+        {error && <p className="error-message">{error}</p>}
+        {success && <p className="success-message">{success}</p>}
       </form>
     </div>
   );

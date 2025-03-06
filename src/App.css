@@ -3,8 +3,8 @@
   padding: 0;
 }
 
-.ReactModal__Content  {
-  bottom: 0!important;
+.ReactModal__Content {
+  bottom: 0 !important;
 }
 
 body {
@@ -14,7 +14,10 @@ body {
   color: #ffffff;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   color: #ffffff;
 }
 
@@ -24,4 +27,8 @@ a {
 
 .error-message {
   color: #ff6347;
+}
+
+.success-message {
+  color: #45a049;
 }

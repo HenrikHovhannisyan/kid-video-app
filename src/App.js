@@ -8,7 +8,6 @@ import VideoPage from "./pages/video/VideoPage";
 import SignUp from "./components/auth/SignUp";
 import SignIn from "./components/auth/SingIn";
 import AuthDetails from "./components/auth/AuthDetails";
-import AddVideo from "./components/videos/AddVideo";
 import Header from "./components/header/Header";
 
 const App = () => {
@@ -21,7 +20,6 @@ const App = () => {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/user-info" element={<AuthDetails />} />
-        <Route path="/add-video" element={<AddVideo />} />
       </Routes>
     </Router>
   );
