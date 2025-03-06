@@ -1,5 +1,7 @@
 import React from "react";
 import "./App.css";
+import "./assets/styles/forms.css";
+import "./assets/styles/buttons.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/home/HomePage";
 import VideoPage from "./pages/video/VideoPage";

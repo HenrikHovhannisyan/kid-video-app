@@ -1,0 +1,33 @@
+.form-box {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+fieldset {
+  padding: 35px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 15px;
+}
+
+legend {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  fieldset {
+    padding: 20px;
+    gap: 15px;
+  }
+
+  legend {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+}
