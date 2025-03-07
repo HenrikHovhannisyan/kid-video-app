@@ -13,6 +13,7 @@ const YouTubeVideo = ({ videoId }) => {
       showinfo: 0,
       disablekb: 1,
       fs: 0,
+      iv_load_policy: 3,
     },
   };
 
@@ -21,14 +22,14 @@ const YouTubeVideo = ({ videoId }) => {
   };
 
   return (
-      <div style={{ position: "relative", width: "100%", height: "100vh" }}>
-        <YouTube
-            videoId={videoId}
-            opts={opts}
-            style={{ width: "100%", height: "100%" }}
-            onEnd={onVideoEnd}
-        />
-      </div>
+    <div style={{ position: "relative", width: "100%", height: "100vh" }}>
+      <YouTube
+        videoId={videoId}
+        opts={opts}
+        style={{ width: "100%", height: "100%" }}
+        onEnd={onVideoEnd}
+      />
+    </div>
   );
 };
 
