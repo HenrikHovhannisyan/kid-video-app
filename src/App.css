@@ -3,10 +3,6 @@
   padding: 0;
 }
 
-.ReactModal__Content {
-  bottom: 0 !important;
-}
-
 body {
   margin: 0;
   font-family: Arial, sans-serif;
