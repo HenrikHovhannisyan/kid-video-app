@@ -20,9 +20,11 @@
 
 .video-thumbnail {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    max-width: 100%;
+    aspect-ratio: 16/9;
 }
-
 .video-title {
     color: #ffffff;
     text-align: center;

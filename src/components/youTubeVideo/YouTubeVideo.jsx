@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import YouTube from "react-youtube";
+import VideoModal from "../videoModal/VideoModal";
 
-const YouTubeVideo = ({ videoId }) => {
+const YouTubeVideo = ({ videoId, videos }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const opts = {
     height: "100%",
     width: "100%",
@@ -21,13 +25,46 @@ const YouTubeVideo = ({ videoId }) => {
     event.target.playVideo();
   };
 
+  const onStateChange = (event) => {
+    // YT.PlayerState.PLAYING = 1
+    // YT.PlayerState.PAUSED = 2
+    setIsPlaying(event.data === 1);
+    if (event.data === 2) {
+      // Видео на паузе
+      setIsModalOpen(true);
+    } else if (event.data === 1) {
+      // Видео воспроизводится
+      setIsModalOpen(false);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleVideoClick = (newVideoId) => {
+  };
+
   return (
-    <div style={{ position: "relative", width: "100%", height: "100vh" }}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "calc(100vh - 64px)",
+      }}
+    >
       <YouTube
         videoId={videoId}
         opts={opts}
         style={{ width: "100%", height: "100%" }}
         onEnd={onVideoEnd}
+        onStateChange={onStateChange}
+      />
+      <VideoModal
+        isOpen={isModalOpen}
+        onRequestClose={handleCloseModal}
+        videos={videos}
+        handleVideoClick={handleVideoClick}
       />
     </div>
   );

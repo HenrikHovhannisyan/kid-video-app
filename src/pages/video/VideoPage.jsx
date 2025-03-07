@@ -50,8 +50,8 @@ const VideoPage = () => {
   };
 
   return (
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
-      <div style={{ flex: 1, position: "relative" }}>
+    <div>
+      <div style={{ position: "relative" }}>
         <div className="video-header">
           <button onClick={goToHomePage}>
             <svg
@@ -70,7 +70,7 @@ const VideoPage = () => {
           </button>
         </div>
 
-        <YouTubeVideo videoId={id} />
+        <YouTubeVideo videoId={id} videos={randomVideos} />
 
         <button onClick={openModal} className="top-btn">
           <svg
