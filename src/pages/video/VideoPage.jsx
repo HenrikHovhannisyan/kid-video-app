@@ -26,7 +26,7 @@ const VideoPage = () => {
 
     handleResize();
 
-    setRandomVideos(getRandomVideos(id, isMobile ? 10 : 9));
+    setRandomVideos(getRandomVideos(id, isMobile ? 10 : 10));
 
     window.addEventListener("resize", handleResize);
 

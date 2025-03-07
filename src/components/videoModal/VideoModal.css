@@ -34,9 +34,12 @@
 }
 
 .video-slider {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  gap: 10px;
   overflow-x: scroll;
-  padding-top: 30px;
+  padding: 40px 10px 0;
 }
 
 .video-slider::-webkit-scrollbar {

@@ -30,10 +30,8 @@ const YouTubeVideo = ({ videoId, videos }) => {
     // YT.PlayerState.PAUSED = 2
     setIsPlaying(event.data === 1);
     if (event.data === 2) {
-      // Видео на паузе
       setIsModalOpen(true);
     } else if (event.data === 1) {
-      // Видео воспроизводится
       setIsModalOpen(false);
     }
   };
