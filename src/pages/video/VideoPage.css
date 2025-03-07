@@ -15,8 +15,8 @@
 
 .video-header > button > svg,
 .top-btn > svg {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 .video-header {
@@ -25,7 +25,7 @@
   height: 60px;
   width: 100%;
   z-index: 2;
-  background-color: #000000;
+  background-color: transparent;
   border: none;
   align-items: center;
   display: flex;
@@ -35,11 +35,11 @@
   z-index: 2;
   background-color: #ffffff;
   border: none;
-  border-radius: 5px;
-  padding: 5px;
+  border-radius: 100%;
+  padding: 13px;
   cursor: pointer;
   line-height: 5px;
-  margin-left: 10px;
+  margin-left: 5px;
   display: none;
 }
 

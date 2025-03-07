@@ -40,15 +40,14 @@ const YouTubeVideo = ({ videoId, videos }) => {
     setIsModalOpen(false);
   };
 
-  const handleVideoClick = (newVideoId) => {
-  };
+  const handleVideoClick = (newVideoId) => {};
 
   return (
     <div
       style={{
         position: "relative",
         width: "100%",
-        height: "calc(100vh - 64px)",
+        height: "100vh",
       }}
     >
       <YouTube
