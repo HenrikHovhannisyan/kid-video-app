@@ -16,7 +16,6 @@ const extractVideoId = (url) => {
   const match = url.match(
     /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/|user\/.*\/))([^?&]+)/
   );
-  console.log(url);
 
   return match ? match[1] : null;
 };
@@ -70,7 +69,6 @@ const UserVideos = ({ userId }) => {
         <div className="videos-grid">
           {videos.map((video) => (
             <div key={video.id} className="video-item">
-              {console.log(video)}
               <div className="video-wrapper">
                 {video.video && (
                   <VideoCard

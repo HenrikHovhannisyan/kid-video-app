@@ -1,15 +1,26 @@
 import React from "react";
-import "./App.css";
-import "./assets/styles/forms.css";
-import "./assets/styles/buttons.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePage from "./pages/home/HomePage";
-import VideoPage from "./pages/video/VideoPage";
+
+// Компоненты
+import Header from "./components/header/Header";
 import SignUp from "./components/auth/SignUp";
 import SignIn from "./components/auth/SingIn";
 import AuthDetails from "./components/auth/AuthDetails";
-import Header from "./components/header/Header";
 
+// Страницы
+import HomePage from "./pages/home/HomePage";
+import VideoPage from "./pages/video/VideoPage";
+
+// Стили
+import "./App.css";
+import "./assets/styles/forms.css";
+import "./assets/styles/buttons.css";
+
+/**
+ * Главный компонент приложения
+ * Содержит маршрутизацию и основную структуру приложения
+ * @returns {React.ReactElement} Компонент App
+ */
 const App = () => {
   return (
     <Router>

@@ -1,55 +1,57 @@
 import React, { useState } from "react";
 import YouTube from "react-youtube";
 import VideoModal from "../videoModal/VideoModal";
+import { YT_PLAYER_STATES, DEFAULT_YOUTUBE_OPTS } from "../../constants";
+import "./YouTubeVideo.css";
 
+/**
+ * Компонент для отображения и управления YouTube видео
+ * @param {Object} props - Свойства компонента
+ * @param {string} props.videoId - ID видео с YouTube
+ * @param {Array} props.videos - Список видео для отображения в модальном окне
+ * @returns {React.ReactElement} Компонент YouTubeVideo
+ */
 const YouTubeVideo = ({ videoId, videos }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const opts = {
-    height: "100%",
-    width: "100%",
-    playerVars: {
-      autoplay: 1,
-      rel: 0,
-      modestbranding: 0,
-      controls: 1,
-      showinfo: 0,
-      disablekb: 1,
-      fs: 0,
-      iv_load_policy: 3,
-    },
-  };
+  const opts = DEFAULT_YOUTUBE_OPTS;
 
+  /**
+   * Обработчик окончания воспроизведения видео
+   * @param {Object} event - Событие окончания воспроизведения
+   */
   const onVideoEnd = (event) => {
     event.target.playVideo();
   };
 
+  /**
+   * Обработчик изменения состояния плеера
+   * @param {Object} event - Событие изменения состояния
+   */
   const onStateChange = (event) => {
-    // YT.PlayerState.PLAYING = 1
-    // YT.PlayerState.PAUSED = 2
-    setIsPlaying(event.data === 1);
-    if (event.data === 2) {
-      setIsModalOpen(true);
-    } else if (event.data === 1) {
-      setIsModalOpen(false);
-    }
+    const isPlaying = event.data === YT_PLAYER_STATES.PLAYING;
+    setIsPlaying(isPlaying);
+    setIsModalOpen(!isPlaying);
   };
 
+  /**
+   * Обработчик закрытия модального окна
+   */
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
-  const handleVideoClick = (newVideoId) => {};
+  /**
+   * Обработчик клика по видео в модальном окне
+   * @param {string} newVideoId - ID нового выбранного видео
+   */
+  const handleVideoClick = (newVideoId) => {
+    // TODO: Добавить логику переключения видео
+  };
 
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
+    <div className="youtube-video-container">
       <YouTube
         videoId={videoId}
         opts={opts}
