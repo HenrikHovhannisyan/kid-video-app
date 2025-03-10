@@ -2,7 +2,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import AddVideo from "../videos/AddVideo";
+import UserVideos from "../userVideos/UserVideos";
 
 const AuthDetails = () => {
   const [authUser, setAuthUser] = useState(null);
@@ -41,7 +41,7 @@ const AuthDetails = () => {
               Sign Out
             </button>
           </div>
-          <AddVideo />
+          <UserVideos userId={authUser.uid} />
         </>
       ) : (
         <p>Signed Out</p>

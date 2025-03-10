@@ -4,7 +4,7 @@ import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import "./AddVideo.css";
 
-const AddVideo = () => {
+const AddVideo = ({ onVideoAdded }) => {
   const [videoUrl, setVideoUrl] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -31,6 +31,16 @@ const AddVideo = () => {
         video: videoUrl,
         createdAt: new Date().toISOString(),
       });
+
+      const newVideo = {
+        video: videoUrl,
+        user_id: user.uid,
+        createdAt: new Date().toISOString(),
+      };
+      
+      if (onVideoAdded) {
+        onVideoAdded(newVideo);
+      }
 
       setSuccess("Видео успешно добавлено!");
       setVideoUrl("");

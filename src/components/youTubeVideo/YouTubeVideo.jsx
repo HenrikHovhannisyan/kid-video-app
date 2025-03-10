@@ -60,7 +60,7 @@ const YouTubeVideo = ({ videoId, videos }) => {
       <VideoModal
         isOpen={isModalOpen}
         onRequestClose={handleCloseModal}
-        videos={videos}
+        videos={videos || []}
         handleVideoClick={handleVideoClick}
       />
     </div>
