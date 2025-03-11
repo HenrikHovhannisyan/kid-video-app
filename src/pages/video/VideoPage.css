@@ -61,12 +61,6 @@
   display: flex;
 }
 
-.btn-block-1 {
-  bottom: 55px;
-  height: 170px;
-  width: 100%;
-}
-
 @media (max-width: 576px) {
   .top-btn,
   .video-header > button {

@@ -89,7 +89,6 @@ const VideoPage = () => {
         </button>
 
         <div className="btn-block" />
-        <div className="btn-block btn-block-1" />
       </div>
 
       <VideoModal
