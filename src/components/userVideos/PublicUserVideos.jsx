@@ -61,7 +61,7 @@ const PublicUserVideos = ({ userId }) => {
 
   return (
     <div className="public-user-videos">
-      <h2>Ваши видео</h2>
+      <h2>Your videos</h2>
       <div className="videos-grid">
         {videos.map((video) => (
           <div key={video.id} className="video-item">

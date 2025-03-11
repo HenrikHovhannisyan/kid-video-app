@@ -6,16 +6,16 @@
   position: absolute;
   bottom: 10px;
   width: 100%;
-  height: 155px;
-  padding: 0;
+  padding: 10px;
   background-color: #000000;
   overflow-y: auto;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 .close-modal-btn {
   position: absolute;
-  top: 5px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #da041c;
@@ -38,8 +38,8 @@
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(1, 1fr);
   gap: 10px;
+  padding-top: 50px;
   overflow-x: scroll;
-  padding: 40px 10px 0;
 }
 
 .video-slider::-webkit-scrollbar {
