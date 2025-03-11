@@ -88,7 +88,7 @@ const UserVideos = ({ userId }) => {
             </div>
           ))}
         </div>
-        {videos.length === 0 && <p>You don't have any videos uploaded yet.</p>}
+        {videos.length === 0 && <p>You don't have videos.</p>}
       </div>
     </>
   );

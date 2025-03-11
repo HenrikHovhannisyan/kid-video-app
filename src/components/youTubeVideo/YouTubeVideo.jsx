@@ -48,6 +48,9 @@ const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
    */
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    if (playerRef.current) {
+      playerRef.current.playVideo();
+    }
   };
 
   /**
