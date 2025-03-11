@@ -13,6 +13,11 @@
   align-items: center;
 }
 
+.header-content > nav {
+  display: flex;
+  gap: 5px;
+}
+
 .logo {
   color: #ecf0f1;
   text-decoration: none;
@@ -28,7 +33,7 @@
 .nav-link {
   color: #ecf0f1;
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 10px 20px;
   border-radius: 4px;
   transition: all 0.3s ease;
 }

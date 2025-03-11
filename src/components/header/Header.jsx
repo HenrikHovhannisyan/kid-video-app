@@ -9,19 +9,46 @@ import { useState, useEffect } from "react";
 const Header = () => {
   // Состояние для хранения информации об аутентифицированном пользователе
   const [authUser, setAuthUser] = useState(null);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
 
-  // Эффект для отслеживания состояния аутентификации
   useEffect(() => {
-    // Подписка на изменения состояния аутентификации
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setAuthUser(user ? user : null);
     });
 
-    // Отписка при размонтировании компонента
-    return () => unsubscribe();
+    // Отслеживаем событие beforeinstallprompt
+    const handleBeforeInstallPrompt = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      unsubscribe();
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
+    };
   }, []);
 
-  // Рендеринг компонента
+  // Функция для установки PWA
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+
+    try {
+      // Показываем диалог установки
+      const result = await deferredPrompt.prompt();
+      // Ожидаем ответ пользователя
+      await result.userChoice;
+      // Очищаем состояние
+      setDeferredPrompt(null);
+    } catch (error) {
+      console.error("Ошибка при установке PWA:", error);
+    }
+  };
+
   return (
     <header className="header">
       <div className="header-content">
@@ -29,6 +56,15 @@ const Header = () => {
           KidsVideo
         </Link>
         <nav>
+          {deferredPrompt && (
+            <button
+              onClick={handleInstallClick}
+              className="button button-primary"
+              aria-label="Install app"
+            >
+              Install app
+            </button>
+          )}
           {authUser ? (
             <Link
               to="/user-info"
