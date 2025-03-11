@@ -29,15 +29,3 @@ export const DEFAULT_YOUTUBE_OPTS = {
     iv_load_policy: 3,
   },
 };
-
-/**
- * Пути маршрутизации приложения
- * @constant {Object}
- */
-export const ROUTES = {
-  HOME: '/',
-  VIDEO: '/video/:id',
-  SIGN_UP: '/sign-up',
-  SIGN_IN: '/sign-in',
-  USER_INFO: '/user-info',
-};
