@@ -10,3 +10,16 @@
 .add-video-container > form > input {
   margin-bottom: 10px;
 }
+
+.youtube-instructions > ol,
+.youtube-instructions > .url-examples > ul {
+  margin-left: 20px;
+}
+
+.youtube-instructions > h3 {
+  margin-bottom: 5px;
+}
+
+.url-examples {
+  margin-top: 10px;
+}

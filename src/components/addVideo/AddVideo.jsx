@@ -15,14 +15,14 @@ const AddVideo = ({ onVideoAdded }) => {
     setSuccess("");
 
     if (!videoUrl) {
-      setError("Пожалуйста, введите URL видео");
+      setError("Please enter the video URL");
       return;
     }
 
     try {
       const user = auth.currentUser;
       if (!user) {
-        setError("Пожалуйста, войдите в систему");
+        setError("Please log in");
         return;
       }
 
@@ -37,21 +37,43 @@ const AddVideo = ({ onVideoAdded }) => {
         user_id: user.uid,
         createdAt: new Date().toISOString(),
       };
-      
+
       if (onVideoAdded) {
         onVideoAdded(newVideo);
       }
 
-      setSuccess("Видео успешно добавлено!");
+      setSuccess("Video added successfully!");
       setVideoUrl("");
     } catch (err) {
-      setError("Ошибка при добавлении видео: " + err.message);
+      setError("Error adding video: " + err.message);
     }
   };
 
   return (
     <div className="add-video-container">
       <h2>Add new video</h2>
+      <div className="youtube-instructions">
+        <h3>How to add a video from YouTube:</h3>
+        <ol>
+          <li>Open the YouTube video you want to add.</li>
+          <li>Click the "Share" button below the video.</li>
+          <li>
+            Copy the video URL from the address bar or from the "Share" window.
+          </li>
+          <li>Paste the copied URL in the input field below.</li>
+        </ol>
+        <div className="url-examples">
+          <p>
+            <strong>Supported URL formats:</strong>
+          </p>
+          <ul>
+            <li>✅ https://www.youtube.com/watch?v=XXXXXXXXXXX</li>
+            <li>✅ https://youtu.be/XXXXXXXXXXX</li>
+            <li>❌ https://youtube.com/shorts/XXXXXXXXXXX</li>
+            <li>❌ https://youtube.com/playlist?list=XXXXXXXXXXX</li>
+          </ul>
+        </div>
+      </div>
       <form onSubmit={handleSubmit}>
         <input
           type="url"
