@@ -5,6 +5,7 @@ import YouTubeVideo from "../../components/youTubeVideo/YouTubeVideo";
 import { videos } from "../../config/videoData";
 import VideoModal from "../../components/videoModal/VideoModal";
 
+// Функция для получения случайных видео, исключая текущее
 const getRandomVideos = (currentId, count) => {
   return videos
     .filter((video) => video.id !== currentId)
@@ -12,53 +13,72 @@ const getRandomVideos = (currentId, count) => {
     .slice(0, count);
 };
 
+// Основной компонент страницы видео
 const VideoPage = () => {
+  // Получаем id видео из параметров URL
   const { id } = useParams();
   const navigate = useNavigate();
-  const [randomVideos, setRandomVideos] = useState([]);
-  const [isMobile, setIsMobile] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const playerRef = React.useRef(null);
+  // Состояния компонента
+  const [randomVideos, setRandomVideos] = useState([]); // Список случайных видео
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Определение мобильного устройства
+  const [modalIsOpen, setModalIsOpen] = useState(false); // Состояние модального окна
+  const playerRef = React.useRef(null); // Ссылка на плеер для управления
 
+  const VIDEOS_COUNT = 10; // Количество случайных видео
+  const MOBILE_BREAKPOINT = 768; // Точка перехода для мобильной версии
+
+  // Обработчик готовности плеера
   const handlePlayerReady = (player) => {
     playerRef.current = player;
   };
 
+  // Обработчик изменения размера окна
+  const handleResize = React.useCallback(() => {
+    setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+  }, []);
+
+  // Загрузка случайных видео при изменении id
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+    setRandomVideos(getRandomVideos(id, VIDEOS_COUNT));
+  }, [id]);
 
-    handleResize();
-
-    setRandomVideos(getRandomVideos(id, isMobile ? 10 : 10));
-
+  // Добавление слушателя изменения размера окна
+  useEffect(() => {
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
-  }, [id, isMobile]);
+  }, [handleResize]);
 
-  const handleVideoClick = (videoId) => {
-    navigate(`/video/${videoId}`);
-  };
+  // Обработчик клика по видео
+  const handleVideoClick = React.useCallback(
+    (videoId) => {
+      navigate(`/video/${videoId}`);
+    },
+    [navigate]
+  );
 
-  const openModal = () => {
+  // Управление плеером (пауза/воспроизведение)
+  const handlePlayerControl = React.useCallback((action) => {
     if (playerRef.current) {
-      playerRef.current.pauseVideo();
+      playerRef.current[action]();
     }
+  }, []);
+
+  // Открытие модального окна и постановка видео на паузу
+  const openModal = React.useCallback(() => {
+    handlePlayerControl("pauseVideo");
     setModalIsOpen(true);
-  };
+  }, [handlePlayerControl]);
 
-  const closeModal = () => {
-    if (playerRef.current) {
-      playerRef.current.playVideo();
-    }
+  // Закрытие модального окна и возобновление воспроизведения
+  const closeModal = React.useCallback(() => {
+    handlePlayerControl("playVideo");
     setModalIsOpen(false);
-  };
+  }, [handlePlayerControl]);
 
-  const goToHomePage = () => {
+  // Переход на главную страницу
+  const goToHomePage = React.useCallback(() => {
     navigate("/");
-  };
+  }, [navigate]);
 
   return (
     <div>
@@ -81,7 +101,11 @@ const VideoPage = () => {
           </button>
         </div>
 
-        <YouTubeVideo videoId={id} videos={randomVideos} onPlayerReady={handlePlayerReady} />
+        <YouTubeVideo
+          videoId={id}
+          videos={randomVideos}
+          onPlayerReady={handlePlayerReady}
+        />
 
         <button onClick={openModal} className="top-btn">
           <svg
