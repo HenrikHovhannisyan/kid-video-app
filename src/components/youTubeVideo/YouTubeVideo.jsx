@@ -11,11 +11,19 @@ import "./YouTubeVideo.css";
  * @param {Array} props.videos - Список видео для отображения в модальном окне
  * @returns {React.ReactElement} Компонент YouTubeVideo
  */
-const YouTubeVideo = ({ videoId, videos }) => {
+const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const playerRef = React.useRef(null);
 
   const opts = DEFAULT_YOUTUBE_OPTS;
+
+  const onReady = (event) => {
+    playerRef.current = event.target;
+    if (onPlayerReady) {
+      onPlayerReady(event.target);
+    }
+  };
 
   /**
    * Обработчик окончания воспроизведения видео
@@ -58,6 +66,7 @@ const YouTubeVideo = ({ videoId, videos }) => {
         style={{ width: "100%", height: "100%" }}
         onEnd={onVideoEnd}
         onStateChange={onStateChange}
+        onReady={onReady}
       />
       <VideoModal
         isOpen={isModalOpen}

@@ -18,6 +18,11 @@ const VideoPage = () => {
   const [randomVideos, setRandomVideos] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const playerRef = React.useRef(null);
+
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,10 +43,16 @@ const VideoPage = () => {
   };
 
   const openModal = () => {
+    if (playerRef.current) {
+      playerRef.current.pauseVideo();
+    }
     setModalIsOpen(true);
   };
 
   const closeModal = () => {
+    if (playerRef.current) {
+      playerRef.current.playVideo();
+    }
     setModalIsOpen(false);
   };
 
@@ -70,7 +81,7 @@ const VideoPage = () => {
           </button>
         </div>
 
-        <YouTubeVideo videoId={id} videos={randomVideos} />
+        <YouTubeVideo videoId={id} videos={randomVideos} onPlayerReady={handlePlayerReady} />
 
         <button onClick={openModal} className="top-btn">
           <svg
