@@ -39,7 +39,7 @@ const AuthDetails = () => {
             <p>
               Signed in as <strong>{authUser.email}</strong>
             </p>
-            <button onClick={userSignOut} className="button button-primary">
+            <button onClick={userSignOut} className="button button-danger">
               Sign Out
             </button>
           </div>

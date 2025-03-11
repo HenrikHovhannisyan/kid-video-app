@@ -21,9 +21,6 @@ export const videos = [
     id: "gb3QCmCGrJg",
   },
   {
-    id: "5ltsySR5h9I",
-  },
-  {
     id: "WFRSLRWP10w",
   },
   {
@@ -36,9 +33,6 @@ export const videos = [
     id: "Cz5q05Hl5gs",
   },
   {
-    id: "-k-DpxL5A4A",
-  },
-  {
     id: "3cd83yYrMGE",
   },
   {
@@ -48,9 +42,6 @@ export const videos = [
     id: "JHMeqmrhmbU",
   },
   {
-    id: "EoDd6EhbhUs",
-  },
-  {
     id: "RBOOkaFAzfg",
   },
   {
@@ -58,9 +49,6 @@ export const videos = [
   },
   {
     id: "wPWTo4CcUz0",
-  },
-  {
-    id: "NPTaR9iATwo",
   },
   {
     id: "C142fkaLLfc",

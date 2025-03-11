@@ -1,22 +1,73 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import YouTube from "react-youtube";
+import { db } from "../../firebase";
+import { collection, query, getDocs } from "firebase/firestore";
 import VideoModal from "../videoModal/VideoModal";
 import { YT_PLAYER_STATES, DEFAULT_YOUTUBE_OPTS } from "../../constants";
 import "./YouTubeVideo.css";
 
-/**
- * Компонент для отображения и управления YouTube видео
- * @param {Object} props - Свойства компонента
- * @param {string} props.videoId - ID видео с YouTube
- * @param {Array} props.videos - Список видео для отображения в модальном окне
- * @returns {React.ReactElement} Компонент YouTubeVideo
- */
 const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [allVideos, setAllVideos] = useState([]);
+  const [displayedVideos, setDisplayedVideos] = useState([]);
   const playerRef = React.useRef(null);
 
   const opts = DEFAULT_YOUTUBE_OPTS;
+
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
+  const selectRandomVideos = (videos, count = 10) => {
+    const shuffledVideos = shuffleArray(videos);
+    return shuffledVideos.slice(0, count);
+  };
+
+  useEffect(() => {
+    const fetchUserVideos = async () => {
+      try {
+        const q = query(collection(db, "videos"));
+        const querySnapshot = await getDocs(q);
+        const userVideosList = [];
+        querySnapshot.forEach((doc) => {
+          const videoData = doc.data();
+          if (videoData.video) {
+            const videoId = extractVideoId(videoData.video);
+            if (videoId) {
+              userVideosList.push({
+                id: videoId,
+                title: videoData.title || "User Video",
+                isUserVideo: true,
+              });
+            }
+          }
+        });
+        setAllVideos([...(videos || []), ...userVideosList]);
+        setDisplayedVideos(
+          selectRandomVideos([...(videos || []), ...userVideosList])
+        );
+      } catch (error) {
+        console.error("Error fetching user videos:", error);
+        setAllVideos(videos || []);
+        setDisplayedVideos(selectRandomVideos(videos || []));
+      }
+    };
+
+    fetchUserVideos();
+  }, [videos]);
+
+  const extractVideoId = (url) => {
+    const match = url.match(
+      /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/|user\/.*\/))([^?&]+)/
+    );
+    return match ? match[1] : null;
+  };
 
   const onReady = (event) => {
     playerRef.current = event.target;
@@ -25,27 +76,16 @@ const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
     }
   };
 
-  /**
-   * Обработчик окончания воспроизведения видео
-   * @param {Object} event - Событие окончания воспроизведения
-   */
   const onVideoEnd = (event) => {
     event.target.playVideo();
   };
 
-  /**
-   * Обработчик изменения состояния плеера
-   * @param {Object} event - Событие изменения состояния
-   */
   const onStateChange = (event) => {
     const isPlaying = event.data === YT_PLAYER_STATES.PLAYING;
     setIsPlaying(isPlaying);
     setIsModalOpen(!isPlaying);
   };
 
-  /**
-   * Обработчик закрытия модального окна
-   */
   const handleCloseModal = () => {
     setIsModalOpen(false);
     if (playerRef.current) {
@@ -53,12 +93,11 @@ const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
     }
   };
 
-  /**
-   * Обработчик клика по видео в модальном окне
-   * @param {string} newVideoId - ID нового выбранного видео
-   */
   const handleVideoClick = (newVideoId) => {
-    // TODO: Добавить логику переключения видео
+    if (playerRef.current && newVideoId) {
+      playerRef.current.loadVideoById(newVideoId);
+      handleCloseModal();
+    }
   };
 
   return (
@@ -74,7 +113,7 @@ const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
       <VideoModal
         isOpen={isModalOpen}
         onRequestClose={handleCloseModal}
-        videos={videos || []}
+        videos={displayedVideos}
         handleVideoClick={handleVideoClick}
       />
     </div>
