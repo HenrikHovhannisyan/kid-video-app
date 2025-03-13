@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./HomePage.css";
 import { videos } from "../../config/videoData";
-import VideoCard from "../../components/videoCard/VideoCard";
+import VideoGrid from "../../components/common/VideoGrid/VideoGrid";
 import PublicUserVideos from "../../components/userVideos/PublicUserVideos";
 import { auth } from "../../firebase";
 
@@ -34,16 +34,11 @@ const HomePage = () => {
       {/* Отображение видео пользователя, если он авторизован */}
       {currentUser && <PublicUserVideos userId={currentUser.uid} />}
       <h2>Recommended Videos</h2>
-      {/* Сетка с рекомендованными видео */}
-      <div className="videos-grid">
-        {shuffledVideos.map((video) => (
-          <VideoCard
-            key={video.id}
-            video={video}
-            handleVideoClick={handleVideoClick}
-          />
-        ))}
-      </div>
+      <VideoGrid
+        videos={shuffledVideos}
+        handleVideoClick={handleVideoClick}
+        emptyMessage="Нет рекомендованных видео"
+      />
     </div>
   );
 };

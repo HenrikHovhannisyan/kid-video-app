@@ -12,6 +12,7 @@ import VideoCard from "../videoCard/VideoCard";
 import "./UserVideos.css";
 import AddVideo from "../addVideo/AddVideo";
 
+// Функция для извлечения ID видео из URL YouTube
 const extractVideoId = (url) => {
   const match = url.match(
     /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/|user\/.*\/))([^?&]+)/
@@ -20,16 +21,21 @@ const extractVideoId = (url) => {
   return match ? match[1] : null;
 };
 
+// Компонент для отображения видео пользователя
 const UserVideos = ({ userId }) => {
+  // Состояние для хранения списка видео
   const [videos, setVideos] = useState([]);
 
+  // Обработчик добавления нового видео
   const handleVideoAdded = (newVideo) => {
     setVideos([...videos, { id: newVideo.id, ...newVideo }]);
   };
 
+  // Загрузка видео пользователя при монтировании компонента или изменении userId
   useEffect(() => {
     const fetchUserVideos = async () => {
       try {
+        // Запрос к Firebase для получения видео текущего пользователя
         const q = query(
           collection(db, "videos"),
           where("user_id", "==", userId)
@@ -50,15 +56,19 @@ const UserVideos = ({ userId }) => {
     }
   }, [userId]);
 
+  // Обработчик удаления видео
   const handleDelete = async (videoId) => {
     try {
+      // Удаление документа из коллекции videos в Firebase
       await deleteDoc(doc(db, "videos", videoId));
+      // Обновление локального состояния после удаления
       setVideos(videos.filter((video) => video.id !== videoId));
     } catch (error) {
       console.error("Error deleting video:", error);
     }
   };
 
+  // Обработчик клика по видео (пока не реализован)
   const handleVideoClick = (videoId) => {};
 
   return (

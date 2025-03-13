@@ -1,0 +1,27 @@
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.video-item {
+  width: 100%;
+  transition: transform 0.2s;
+}
+
+.video-item:hover {
+  transform: scale(1.02);
+}
+
+.video-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.empty-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  padding: 2rem;
+}

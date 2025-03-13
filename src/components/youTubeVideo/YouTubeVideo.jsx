@@ -6,15 +6,29 @@ import VideoModal from "../videoModal/VideoModal";
 import { YT_PLAYER_STATES, DEFAULT_YOUTUBE_OPTS } from "../../constants";
 import "./YouTubeVideo.css";
 
+// Компонент YouTubeVideo отвечает за воспроизведение видео с YouTube
+// Обеспечивает интерфейс плеера, управление воспроизведением и отображение списка рекомендованных видео
+//
+// Пропсы:
+// @param {string} videoId - ID текущего видео для воспроизведения
+// @param {Array} videos - Массив доступных видео для рекомендаций
+// @param {Function} onPlayerReady - Функция обратного вызова, вызывается когда плеер готов
 const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
+  // Состояния компонента:
+  // isPlaying - флаг воспроизведения видео
+  // isModalOpen - флаг открытия модального окна с рекомендациями
+  // allVideos - полный список доступных видео
+  // displayedVideos - отфильтрованный список видео для отображения
   const [isPlaying, setIsPlaying] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [allVideos, setAllVideos] = useState([]);
   const [displayedVideos, setDisplayedVideos] = useState([]);
+  // Реф для доступа к плееру YouTube
   const playerRef = React.useRef(null);
 
   const opts = DEFAULT_YOUTUBE_OPTS;
 
+  // Функция для случайного перемешивания массива видео
   const shuffleArray = (array) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -24,11 +38,16 @@ const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
     return shuffled;
   };
 
+  // Функция выбора случайных видео из списка
+  // @param {Array} videos - Массив всех доступных видео
+  // @param {number} count - Количество видео для выбора
   const selectRandomVideos = (videos, count = 10) => {
     const shuffledVideos = shuffleArray(videos);
     return shuffledVideos.slice(0, count);
   };
 
+  // Эффект для загрузки пользовательских видео из Firebase
+  // Объединяет предоставленные видео с видео пользователей
   useEffect(() => {
     const fetchUserVideos = async () => {
       try {
@@ -62,6 +81,7 @@ const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
     fetchUserVideos();
   }, [videos]);
 
+  // Функция извлечения ID видео из различных форматов URL YouTube
   const extractVideoId = (url) => {
     const match = url.match(
       /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/|user\/.*\/))([^?&]+)/
@@ -69,6 +89,7 @@ const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
     return match ? match[1] : null;
   };
 
+  // Обработчик события готовности плеера
   const onReady = (event) => {
     playerRef.current = event.target;
     if (onPlayerReady) {
@@ -76,10 +97,13 @@ const YouTubeVideo = ({ videoId, videos, onPlayerReady }) => {
     }
   };
 
+  // Обработчик окончания воспроизведения видео
   const onVideoEnd = (event) => {
     event.target.playVideo();
   };
 
+  // Обработчик изменения состояния плеера
+  // Управляет отображением модального окна с рекомендациями
   const onStateChange = (event) => {
     const isPlaying = event.data === YT_PLAYER_STATES.PLAYING;
     setIsPlaying(isPlaying);

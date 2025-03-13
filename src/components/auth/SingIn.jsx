@@ -4,22 +4,29 @@ import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthStyle.css";
 
+// Компонент для аутентификации пользователя через Firebase
+// Обрабатывает вход по email и паролю с валидацией полей
 const SignIn = () => {
   const navigate = useNavigate();
+  // Состояния для хранения введенных данных и ошибок
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  // Функция для проверки корректности email с помощью регулярного выражения
   function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   }
 
+  // Обработчик отправки формы входа
   function logIn(e) {
     e.preventDefault();
     let isValid = true;
-    // Email validation
+
+    // Валидация email
     if (!email) {
       setEmailError("Email is required");
       isValid = false;
@@ -29,19 +36,25 @@ const SignIn = () => {
     } else {
       setEmailError("");
     }
-    // Password validation
+
+    // Валидация пароля
     if (!password) {
       setPasswordError("Password is required");
       isValid = false;
     } else {
       setPasswordError("");
     }
+
+    // Если есть ошибки валидации, прерываем отправку
     if (!isValid) {
       return;
     }
+
+    // Аутентификация через Firebase
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
         console.log(user);
+        // Очищаем состояния и перенаправляем на главную страницу
         setError("");
         setEmail("");
         setPassword("");
@@ -52,6 +65,8 @@ const SignIn = () => {
         setError("Sorry, couldn't find your account 😔");
       });
   }
+
+  // Рендер формы входа с валидацией и обработкой ошибок
   return (
     <div className="form-box">
       <form>

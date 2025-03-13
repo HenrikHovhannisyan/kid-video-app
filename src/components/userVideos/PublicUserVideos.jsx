@@ -6,6 +6,8 @@ import VideoCard from "../videoCard/VideoCard";
 import "./UserVideos.css";
 import { Link } from "react-router-dom";
 
+// Функция для извлечения ID видео из URL YouTube
+// Поддерживает различные форматы ссылок (обычные, shorts, embed и т.д.)
 const extractVideoId = (url) => {
   const match = url.match(
     /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|live\/|user\/.*\/))([^?&]+)/
@@ -13,12 +15,16 @@ const extractVideoId = (url) => {
   return match ? match[1] : null;
 };
 
+// Компонент для отображения публичных видео пользователя
+// Принимает userId как обязательный параметр
 const PublicUserVideos = ({ userId }) => {
+  // Состояния для управления списком видео, загрузкой и ошибками
   const [videos, setVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Функция для получения видео пользователя из Firestore
     const fetchUserVideos = async () => {
       if (!userId) return;
 
@@ -26,6 +32,7 @@ const PublicUserVideos = ({ userId }) => {
       setError(null);
 
       try {
+        // Создаем запрос к коллекции videos, фильтруя по user_id
         const q = query(
           collection(db, "videos"),
           where("user_id", "==", userId)
@@ -38,7 +45,7 @@ const PublicUserVideos = ({ userId }) => {
         setVideos(videosList);
       } catch (error) {
         console.error("Error fetching videos:", error);
-        setError("Не удалось загрузить видео. Пожалуйста, попробуйте позже.");
+        setError("Failed to load videos. Please try again later.");
       } finally {
         setIsLoading(false);
       }
@@ -47,18 +54,22 @@ const PublicUserVideos = ({ userId }) => {
     fetchUserVideos();
   }, [userId]);
 
+  // Обработчик клика по видео (может быть расширен при необходимости)
   const handleVideoClick = (videoId) => {
-    // Обработчик клика по видео может быть реализован при необходимости
+    // Здесь можно добавить логику обработки клика по видео
   };
 
+  // Отображение индикатора загрузки
   if (isLoading) {
-    return <div className="loading-indicator">Loading video...</div>;
+    return <div className="loading-indicator">Loading videos...</div>;
   }
 
+  // Отображение ошибки, если она есть
   if (error) {
     return <div className="error-message">{error}</div>;
   }
 
+  // Основной рендер компонента
   return (
     <div className="public-user-videos">
       <h2>Your videos</h2>
@@ -70,7 +81,7 @@ const PublicUserVideos = ({ userId }) => {
                 <VideoCard
                   video={{
                     id: extractVideoId(video.video),
-                    title: video.title || "Без названия",
+                    title: video.title || "Untitled",
                   }}
                   handleVideoClick={handleVideoClick}
                 />
@@ -81,13 +92,14 @@ const PublicUserVideos = ({ userId }) => {
       </div>
       {videos.length === 0 && (
         <p>
-          You don't have videos. <Link to="/user-info">Add video</Link>
+          You don't have any videos yet. <Link to="/user-info">Add video</Link>
         </p>
       )}
     </div>
   );
 };
 
+// Проверка типов пропсов
 PublicUserVideos.propTypes = {
   userId: PropTypes.string.isRequired,
 };
