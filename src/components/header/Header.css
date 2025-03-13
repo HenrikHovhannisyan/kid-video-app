@@ -32,9 +32,12 @@
 
 .nav-link {
   color: #ecf0f1;
-  text-decoration: none;
   padding: 10px 20px;
-  border-radius: 4px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
@@ -50,9 +53,5 @@
 
   .logo {
     font-size: 1.2rem;
-  }
-
-  .nav-link {
-    padding: 0.4rem 0.8rem;
   }
 }

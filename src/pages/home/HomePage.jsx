@@ -33,7 +33,8 @@ const HomePage = () => {
     <div className="home-container">
       {/* Отображение видео пользователя, если он авторизован */}
       {currentUser && <PublicUserVideos userId={currentUser.uid} />}
-      <h2>Recommended Videos</h2>
+      <hr />
+      <h2 style={{ marginTop: 15 }}>Recommended Videos</h2>
       <VideoGrid
         videos={shuffledVideos}
         handleVideoClick={handleVideoClick}
