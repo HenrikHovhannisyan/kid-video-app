@@ -4,6 +4,12 @@ import "./Header.css";
 import { auth } from "../../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDownload,
+  faRightToBracket,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 // Компонент Header отвечает за отображение навигационной панели
 const Header = () => {
@@ -62,7 +68,7 @@ const Header = () => {
               className="button button-primary"
               aria-label="Install app"
             >
-              Install app
+              <FontAwesomeIcon icon={faDownload} /> Install app
             </button>
           )}
           {authUser ? (
@@ -71,11 +77,11 @@ const Header = () => {
               className="nav-link"
               aria-label="User profile"
             >
-              Profile
+              <FontAwesomeIcon icon={faUser} /> Profile
             </Link>
           ) : (
-            <Link to="/sign-in" className="nav-link" aria-label="Sign in">
-              Sign in
+            <Link to="/sign-in" className="nav-link" aria-label="Sign In">
+              <FontAwesomeIcon icon={faRightToBracket} /> Sign In
             </Link>
           )}
         </nav>

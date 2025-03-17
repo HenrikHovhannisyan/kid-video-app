@@ -40,6 +40,41 @@ legend {
   width: max-content;
 }
 
+/* Контейнер для поля ввода пароля и кнопки */
+.password-input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Стили для кнопки показать/скрыть пароль */
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+/* Убираем стандартные стили кнопки при фокусе */
+.toggle-password:focus {
+  outline: none;
+}
+
+/* Стили для поля ввода внутри контейнера пароля */
+.password-input-container input {
+  width: 100%;
+  padding-right: 40px;
+}
+
 @media (max-width: 600px) {
   fieldset {
     padding: 20px;

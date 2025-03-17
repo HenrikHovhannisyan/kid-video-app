@@ -11,6 +11,8 @@ import {
 import VideoCard from "../videoCard/VideoCard";
 import "./UserVideos.css";
 import AddVideo from "../addVideo/AddVideo";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 // Функция для извлечения ID видео из URL YouTube
 const extractVideoId = (url) => {
@@ -93,7 +95,7 @@ const UserVideos = ({ userId }) => {
                 onClick={() => handleDelete(video.id)}
                 className="button button-danger"
               >
-                Delete
+                <FontAwesomeIcon icon={faTrashCan} /> Delete
               </button>
             </div>
           ))}

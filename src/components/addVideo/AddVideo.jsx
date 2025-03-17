@@ -3,6 +3,8 @@ import { auth } from "../../firebase";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import "./AddVideo.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 // Компонент для добавления новых видео с YouTube в коллекцию пользователя
 // Предоставляет форму для вставки URL видео и выполняет:
@@ -107,7 +109,7 @@ const AddVideo = ({ onVideoAdded }) => {
           required
         />
         <button type="submit" className="button button-primary">
-          Add
+          <FontAwesomeIcon icon={faPlus} /> Add
         </button>
         {error && <p className="error-message">{error}</p>}
         {success && <p className="success-message">{success}</p>}

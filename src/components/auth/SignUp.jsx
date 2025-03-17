@@ -4,16 +4,26 @@ import React, { useState } from "react"; // React и хук для управл�
 import { auth } from "../../firebase"; // Экземпляр аутентификации Firebase
 import { Link, useNavigate } from "react-router-dom"; // Компоненты для навигации
 import "./AuthStyle.css"; // Стили компонента
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEye,
+  faEyeSlash,
+  faRightToBracket,
+  faCirclePlus,
+} from "@fortawesome/free-solid-svg-icons";
 
-// Компонент регистрации нового пользователя
+// Компонент регистрации нового пользователя (SignUp)
+// Этот компонент отвечает за регистрацию новых пользователей в приложении
+// Он включает форму с полями для email и пароля, а также валидацию введенных данных
 const SignUp = () => {
   const navigate = useNavigate(); // Хук для программной навигации
 
-  // Состояния для хранения данных формы
-  const [email, setEmail] = useState(""); // Email пользователя
-  const [password, setPassword] = useState(""); // Пароль
-  const [copyPassword, setCopyPassword] = useState(""); // Подтверждение пароля
-
+  // Состояния для управления формой
+  const [email, setEmail] = useState(""); // Состояние для хранения email пользователя
+  const [password, setPassword] = useState(""); // Состояние для хранения пароля
+  const [copyPassword, setCopyPassword] = useState(""); // Состояние для хранения подтверждения пароля
+  const [showPassword, setShowPassword] = useState(false); // Состояние для отображения/скрытия пароля
+  const [showCopyPassword, setShowCopyPassword] = useState(false); // Состояние для отображения/скрытия подтверждения пароля
   // Состояния для хранения ошибок
   const [error, setError] = useState(""); // Общая ошибка
   const [emailError, setEmailError] = useState(""); // Ошибка email
@@ -97,30 +107,54 @@ const SignUp = () => {
             className={emailError ? "error" : email ? "success" : ""}
           />
           {emailError && <p className="error-message">{emailError}</p>}
-          <input
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            className={passwordError ? "error" : password ? "success" : ""}
-          />
+          <div className="password-input-container">
+            <input
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type={showPassword ? "text" : "password"}
+              className={passwordError ? "error" : password ? "success" : ""}
+            />
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </button>
+          </div>
           {passwordError && <p className="error-message">{passwordError}</p>}
-          <input
-            placeholder="Confirm password"
-            value={copyPassword}
-            onChange={(e) => setCopyPassword(e.target.value)}
-            type="password"
-            className={
-              copyPasswordError ? "error" : copyPassword ? "success" : ""
-            }
-          />
+          <div className="password-input-container">
+            <input
+              placeholder="Confirm password"
+              value={copyPassword}
+              onChange={(e) => setCopyPassword(e.target.value)}
+              type={showCopyPassword ? "text" : "password"}
+              className={
+                copyPasswordError ? "error" : copyPassword ? "success" : ""
+              }
+            />
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={() => setShowCopyPassword(!showCopyPassword)}
+            >
+              <FontAwesomeIcon icon={showCopyPassword ? faEyeSlash : faEye} />
+            </button>
+          </div>
           {copyPasswordError && (
             <p className="error-message">{copyPasswordError}</p>
           )}
           {error ? <p className="error-message">{error}</p> : ""}
-          <button className="button button-primary">Create Account</button>
+          <button className="button button-primary">
+            <FontAwesomeIcon icon={faCirclePlus} /> Create Account
+          </button>
+          <hr />
           <p>
-            Already have an account? <Link to="/sign-in">Sign In</Link>
+            Already have an account?{" "}
+            <Link to="/sign-in" className="button button-primary">
+              <FontAwesomeIcon icon={faRightToBracket} /> Sign In
+            </Link>
           </p>
         </fieldset>
       </form>

@@ -5,6 +5,8 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import VideoCard from "../videoCard/VideoCard";
 import "./UserVideos.css";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 // Функция для извлечения ID видео из URL YouTube
 // Поддерживает различные форматы ссылок (обычные, shorts, embed и т.д.)
@@ -94,7 +96,7 @@ const PublicUserVideos = ({ userId }) => {
         <p>
           You don't have any videos yet.{" "}
           <Link to="/user-info" className="button button-primary">
-            Add video
+            <FontAwesomeIcon icon={faPlus} /> Add video
           </Link>
         </p>
       )}

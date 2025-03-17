@@ -3,6 +3,12 @@ import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import "./AuthStyle.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEye,
+  faEyeSlash,
+  faRightToBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
 // Компонент для аутентификации пользователя через Firebase
 // Обрабатывает вход по email и паролю с валидацией полей
@@ -14,6 +20,7 @@ const SignIn = () => {
   const [error, setError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // Функция для проверки корректности email с помощью регулярного выражения
   function validateEmail(email) {
@@ -80,20 +87,33 @@ const SignIn = () => {
             className={emailError ? "error" : email ? "success" : ""}
           />
           {emailError && <p className="error-message">{emailError}</p>}
-          <input
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            className={passwordError ? "error" : password ? "success" : ""}
-          />
+          <div className="password-input-container">
+            <input
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type={showPassword ? "text" : "password"}
+              className={passwordError ? "error" : password ? "success" : ""}
+            />
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+            </button>
+          </div>
           {passwordError && <p className="error-message">{passwordError}</p>}
           {error ? <p className="error-message">{error}</p> : ""}
           <button onClick={logIn} className="button button-primary">
-            Login
+            <FontAwesomeIcon icon={faRightToBracket} /> Login
           </button>
+          <hr />
           <p>
-            Don't have an account? <Link to="/sign-up">Sign Up</Link>
+            Don't have an account?{" "}
+            <Link to="/sign-up" className="button button-primary">
+              <FontAwesomeIcon icon={faRightToBracket} /> Sign Up
+            </Link>
           </p>
         </fieldset>
       </form>

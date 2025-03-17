@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import UserVideos from "../userVideos/UserVideos";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 // Компонент AuthDetails отвечает за отображение информации о пользователе и управление его аутентификацией
 const AuthDetails = () => {
@@ -52,7 +54,7 @@ const AuthDetails = () => {
               Signed in as <strong>{authUser.email}</strong>
             </p>
             <button onClick={userSignOut} className="button button-danger">
-              Sign Out
+              <FontAwesomeIcon icon={faRightFromBracket} /> Sign Out
             </button>
           </div>
           {/* Отображаем компонент с видео пользователя, передавая его ID */}
