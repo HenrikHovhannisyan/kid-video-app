@@ -92,7 +92,10 @@ const PublicUserVideos = ({ userId }) => {
       </div>
       {videos.length === 0 && (
         <p>
-          You don't have any videos yet. <Link to="/user-info">Add video</Link>
+          You don't have any videos yet.{" "}
+          <Link to="/user-info" className="button button-primary">
+            Add video
+          </Link>
         </p>
       )}
     </div>
