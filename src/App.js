@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // Компоненты
 import Header from "./components/header/Header";
-import SignUp from "./components/auth/SignUp";
-import SignIn from "./components/auth/SingIn";
-import AuthDetails from "./components/auth/AuthDetails";
 
 // Страницы
 import HomePage from "./pages/home/HomePage";
 import VideoPage from "./pages/video/VideoPage";
+import SignUp from "./pages/auth/SignUp";
+import SignIn from "./pages/auth/SingIn";
+import AuthDetails from "./pages/auth/AuthDetails";
 
 // Стили
 import "./App.css";
