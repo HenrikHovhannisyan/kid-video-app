@@ -1,62 +1,62 @@
 .video-card {
-    position: relative;
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .video-card:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .video-card:focus {
-    outline: 2px solid #007bff;
-    outline-offset: 2px;
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
 }
 
 .video-thumbnail {
-    width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .video-thumbnail.loaded {
-    opacity: 1;
+  opacity: 1;
 }
 
 .video-thumbnail-loading,
 .video-thumbnail-error {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f0f0f0;
-    color: #666;
-    font-size: 14px;
-    text-align: center;
-    padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  color: #666;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
 }
 
 .video-thumbnail-error {
-    background-color: #fee;
-    color: #d32f2f;
+  background-color: #fee;
+  color: #d32f2f;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .video-grid {
     padding: 5px;
   }
   .video-card {
     width: 100%;
-    min-width: 150px;
+    min-width: 250px;
     margin: 0;
   }
 }
