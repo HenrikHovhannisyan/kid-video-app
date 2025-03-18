@@ -65,13 +65,11 @@ const VideoPage = () => {
 
   // Открытие модального окна и постановка видео на паузу
   const openModal = React.useCallback(() => {
-    handlePlayerControl("pauseVideo");
     setModalIsOpen(true);
   }, [handlePlayerControl]);
 
   // Закрытие модального окна и возобновление воспроизведения
   const closeModal = React.useCallback(() => {
-    handlePlayerControl("playVideo");
     setModalIsOpen(false);
   }, [handlePlayerControl]);
 
