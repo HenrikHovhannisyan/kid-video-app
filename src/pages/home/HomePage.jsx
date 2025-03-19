@@ -4,6 +4,9 @@ import { videos } from "../../config/videoData";
 import VideoGrid from "../../components/common/VideoGrid/VideoGrid";
 import PublicUserVideos from "../../components/userVideos/PublicUserVideos";
 import { auth } from "../../firebase";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 // Функция для случайного перемешивания массива видео
 const shuffleArray = (array) => {
@@ -32,10 +35,17 @@ const HomePage = () => {
   return (
     <div className="home-container">
       {/* Отображение видео пользователя, если он авторизован */}
-      {currentUser && (
+      {currentUser ? (
         <>
           <PublicUserVideos userId={currentUser.uid} /> <hr />
         </>
+      ) : (
+        <div className="login-prompt">
+          <p>To add your videos, please log in.</p>
+          <Link to="/sign-in" className="button button-primary">
+            <FontAwesomeIcon icon={faRightToBracket} /> Sign In
+          </Link>
+        </div>
       )}
 
       <h2 style={{ marginTop: 15 }}>Recommended Videos</h2>

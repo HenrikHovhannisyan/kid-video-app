@@ -11,6 +11,13 @@
   margin-bottom: 10px;
 }
 
+.login-prompt {
+  margin: 20px 0px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 @media (max-width: 768px) {
   .home-container {
     padding: 1rem 0.5rem;
