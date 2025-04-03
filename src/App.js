@@ -9,7 +9,7 @@ import HomePage from "./pages/home/HomePage";
 import VideoPage from "./pages/video/VideoPage";
 import SignUp from "./pages/auth/SignUp";
 import SignIn from "./pages/auth/SingIn";
-import AuthDetails from "./pages/auth/AuthDetails";
+import ProtectedUserInfo from "./components/common/ProtectedUserInfo/ProtectedUserInfo";
 
 // Стили
 import "./App.css";
@@ -30,7 +30,7 @@ const App = () => {
         <Route path="/video/:id" element={<VideoPage />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/user-info" element={<AuthDetails />} />
+        <Route path="/user-info" element={<ProtectedUserInfo />} />
       </Routes>
     </Router>
   );
