@@ -30,7 +30,7 @@ Kid Video App is a child-friendly video platform designed to provide a safe and 
 1. Clone the repository:
 
 ```bash
-git clone [repository-url]
+git clone https://github.com/HenrikHovhannisyan/kid-video-app.git
 ```
 
 2. Install dependencies:
@@ -63,11 +63,3 @@ npm run build
 2. Browse through the curated video collection
 3. Add videos to favorites for quick access
 4. Use parental controls when needed
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details
