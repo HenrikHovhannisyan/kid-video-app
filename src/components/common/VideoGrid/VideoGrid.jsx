@@ -22,7 +22,6 @@ const VideoGrid = ({ videos, handleVideoClick, emptyMessage }) => {
             <VideoCard
               video={{
                 id: video.id,
-                title: video.title || "Untitled", // Если название отсутствует, используем "Без названия"
               }}
               handleVideoClick={handleVideoClick}
             />

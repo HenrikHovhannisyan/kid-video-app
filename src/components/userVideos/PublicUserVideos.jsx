@@ -83,7 +83,6 @@ const PublicUserVideos = ({ userId }) => {
                 <VideoCard
                   video={{
                     id: extractVideoId(video.video),
-                    title: video.title || "Untitled",
                   }}
                   handleVideoClick={handleVideoClick}
                 />
