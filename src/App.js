@@ -1,5 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Modal from "react-modal";
+
+// Устанавливаем корневой элемент для react-modal
+Modal.setAppElement("#root");
 
 // Компоненты
 import Header from "./components/header/Header";
