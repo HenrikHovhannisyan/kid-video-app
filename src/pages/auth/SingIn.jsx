@@ -60,7 +60,6 @@ const SignIn = () => {
     // Аутентификация через Firebase
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        console.log(user);
         // Очищаем состояния и перенаправляем на главную страницу
         setError("");
         setEmail("");

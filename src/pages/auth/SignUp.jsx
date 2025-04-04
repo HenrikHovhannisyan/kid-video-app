@@ -80,7 +80,6 @@ const SignUp = () => {
     // Создаем нового пользователя в Firebase
     createUserWithEmailAndPassword(auth, email, password)
       .then((user) => {
-        console.log(user); // Логируем успешную регистрацию
         // Очищаем все поля и ошибки
         setError("");
         setEmail("");

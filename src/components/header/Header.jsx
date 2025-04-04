@@ -51,7 +51,7 @@ const Header = () => {
       // Очищаем состояние
       setDeferredPrompt(null);
     } catch (error) {
-      console.error("Ошибка при установке PWA:", error);
+      console.error("Error installing PWA:", error);
     }
   };
 

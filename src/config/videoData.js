@@ -75,9 +75,6 @@ export const videos = [
     id: "ztvSIMbGXXg",
   },
   {
-    id: "UmqnrK1sRMU",
-  },
-  {
     id: "1yosLICm4Ak",
   },
   {

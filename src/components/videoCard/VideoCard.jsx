@@ -60,11 +60,10 @@ const VideoCard = ({ video, handleVideoClick }) => {
 };
 
 // Определение типов пропсов компонента через PropTypes
-// Обязательные поля: video (объект с id и title) и handleVideoClick (функция)
+// Обязательные поля: video (объект с id) и handleVideoClick (функция)
 VideoCard.propTypes = {
   video: PropTypes.shape({
     id: PropTypes.string.isRequired, // Обязательный ID видео
-    title: PropTypes.string.isRequired, // Обязательное название видео
   }).isRequired,
   handleVideoClick: PropTypes.func.isRequired, // Обязательная функция обработки клика
 };
